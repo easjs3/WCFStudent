@@ -16,32 +16,80 @@ namespace WcfStudent
         [OperationContract]
         string GetData(int value);
 
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        //[OperationContract]
+        //CompositeType GetDataUsingDataContract(CompositeType composite);
+
+    
 
         // TODO: Add your service operations here
+
+
+        [OperationContract]
+        void AddStudent(string name, int alder);
+
+
+        [OperationContract]
+        Student FindStudent(string name);
+
+
+        [OperationContract]
+        void RemoveStudent(string name);
+
+
+        [OperationContract]
+        void EditStudent(string name);
+
+
+        [OperationContract]
+        List<Student> GetAlleStudents();
+
+
+
+
+
     }
 
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
+    //[DataContract]
+    //public class CompositeType
+    //{
+    //    string stringValue = "Hello ";
+
+    //    bool boolValue = true;
+    //    [DataMember]
+    //    public bool BoolValue
+    //    {
+    //        get { return boolValue; }
+    //        set { boolValue = value; }
+    //    }
+
+    //    [DataMember]
+    //    public string StringValue
+    //    {
+    //        get { return stringValue; }
+    //        set { stringValue = value; }
+    //    }
+    //}
+
+
     [DataContract]
-    public class CompositeType
+    public class Student
     {
-        bool boolValue = true;
-        string stringValue = "Hello ";
+        [DataMember]
+        public string name { get; set; }
+        [DataMember]
+        public int alder { get; set; }
 
         [DataMember]
-        public bool BoolValue
+        public static List<Student> StudentListe { get; set; }
+
+
+        static Student()
         {
-            get { return boolValue; }
-            set { boolValue = value; }
+            StudentListe = new List<Student>();
         }
 
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+
     }
 }
