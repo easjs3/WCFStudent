@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -9,17 +10,29 @@ namespace StudentClient
 {
     class Program
     {
+
+        //metode til at få fat i connectionString i Appconfig
+        private static string GetConnectionString()
+        {
+            ConnectionStringSettingsCollection connectionStringSettingsCollection = ConfigurationManager.ConnectionStrings;
+            ConnectionStringSettings connStringSettings = connectionStringSettingsCollection["MikDatabaseAzure"];
+            return connStringSettings.ConnectionString;
+        }
+
         static void Main(string[] args)
         {
             //vi øsnker at lave quary som hvis vi selv bruger den
             string GetAll = "select * from Student";
 
             //vores string til databasen
-            string DatabaseLinje = "Server=tcp:studentdatabasemik.database.windows.net,1433;Initial Catalog=StudentDatabase;Persist Security Info=False;User ID=krois;Password=Mik12341234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+            string DatabaseLinje = GetConnectionString();
             //man finder den ved at gå ind på:
             ///1. går ind på azure
             /// 2. tryk på din sql
             /// 3. connection strings og brug ADO.NET
+    
+
+            
 
             using (SqlConnection DBconnection = new SqlConnection(DatabaseLinje))
             {
