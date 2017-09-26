@@ -32,7 +32,7 @@ namespace StudentClient
                         {
                             int alder = reader.GetInt32(0);
                             string navn = reader.GetString(1);
-                            Console.WriteLine(alder + " " + navn);
+                            Console.WriteLine($"ID:{alder} Navn: {navn}");
                         }
                     }
                 }
